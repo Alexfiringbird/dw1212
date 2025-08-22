@@ -18,11 +18,11 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Build
-      run: dotnet build dw1212.sqlproj
+      run: dotnet build ./dw1212/dw1212.sqlproj
 
     - name: Deploy
       uses: azure/sql-action@v2
       with:
         connection-string: 'Server=tcp:zhftest0801.sql.azuresynapse.azure.cn,1433;Initial Catalog=zhftest;Persist Security Info=False;User ID=sqladminuser;Password=P@ssw0rd!...;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
         action: 'publish'
-        path: 'bin/Debug/MyDatabaseProject.dacpac'
+        path: './dw1212/bin/Debug/MyDatabaseProject.dacpac'
