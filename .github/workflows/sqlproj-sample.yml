@@ -1,0 +1,27 @@
+# This is a basic workflow to help you get started with Actions
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Build
+      run: dotnet build dw1212.sqlproj
+
+    - name: Deploy
+      uses: azure/sql-action@v2
+      with:
+        connection-string: 'Server=tcp:zhftest0801.sql.azuresynapse.azure.cn,1433;Initial Catalog=zhftest;Persist Security Info=False;User ID=sqladminuser;Password=P@ssw0rd!...;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;'
+        action: 'publish'
+        path: 'bin/Debug/MyDatabaseProject.dacpac'
