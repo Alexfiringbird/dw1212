@@ -23,7 +23,11 @@ jobs:
         vs-version: '17.0'  # Visual Studio 2022
         
     - name: Build
-      run: msbuild build ./dw1212/dw1212.sqlproj
+      run:      msbuild ./dw1212/dw1212.sqlproj `
+          /p:Configuration=Release `
+          /p:Platform="Any CPU" `
+          /nologo `
+          /nr:false  # 禁用响应文件
 
     - name: Deploy
       uses: azure/sql-action@v2
