@@ -16,9 +16,14 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-
+        
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      with:
+        vs-version: '17.0'  # Visual Studio 2022
+        
     - name: Build
-      run: dotnet build ./dw1212/dw1212.sqlproj
+      run: msbuild build ./dw1212/dw1212.sqlproj
 
     - name: Deploy
       uses: azure/sql-action@v2
